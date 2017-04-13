@@ -1,0 +1,39 @@
+@import "imports/reset";
+@import "imports/variable";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: $c-gray;
+  background: $bg-gray;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+  color: $c-green;
+}
+
+h2 {
+  font-size: 32px;
+  color: $c-green;
+}
+
+i, em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 700;
+}
+
+label {
+  font-size: 14px;
+}
+
+#loginpage {
+  h1 {
+    font-size: 48px;
+  }
+}
