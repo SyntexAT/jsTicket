@@ -18,215 +18,69 @@ $border-gray: #979797;
 $border-lightgray: #D5D5D5;
 */
 
-* {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
-    color: #4A4A4A;
-    line-height: normal;
-}
+* { font-family: 'Open Sans', sans-serif; font-weight: 400; color: #4A4A4A; line-height: normal; }
 
-body {
-    background: #eee;
-}
+body { background: #eee; }
+h1 { font-size: 36px; font-weight: 600; color: #00794C; margin-bottom: 20px; }
+h2 { font-size: 32px; color: #00794C; margin-bottom: 20px; }
+p { margin-bottom: 1em; }
+a { color: #00794C; text-decoration: none; }
+i, em { font-style: italic; }
+strong { font-weight: 700; }
+ul { list-style-type: none; }
 
-h1 {
-    font-size: 36px;
-    font-weight: 600;
-    color: #00794C;
-    margin-bottom: 20px;
-}
+label { font-size: 14px; }
+form input, form textarea { width: calc(100% - 32px); margin-bottom: 10px; }
+form button { width: 100%; }
+input[type="text"] { padding: 10px 15px; border: 1px solid #ccc; }
+textarea { padding: 10px 15px; border: 1px solid #ccc; resize: none; height: 5em;}
 
-h2 {
-    font-size: 32px;
-    font-weight: 600;
-    color: #00794C;
-    margin-bottom: 20px;
-}
+.btn { padding: 10px 15px; border: 1px solid #ccc; background: #fff; font-weight: 700; border-radius: 2px; cursor: pointer; }
+.btn-green { background: #00794C; border: 1px solid #00794C; color: #FFF; }
+.btn-red { background: #D0011B; border: 1px solid #D0011B; color: #FFF; }
+.btn-orange { background: #F6A623; border: 1px solid #F6A623; color: #FFF; }
 
-p {
-  margin-bottom: 1em;
-}
+header { background: #00794C; }
+header .container::after { content: ''; display: block; clear: both; }
 
-a {
-    color: #00794C;
-    text-decoration: none;
-}
+.logo { float: left; font-size: 36px; font-weight: 700;color: #FFF; padding: 13px 0; }
 
-i, em {
-    font-style: italic;
-}
+.menu{ float: right; }
+.menu ul { display: flex; flex-wrap: wrap; }
+.menu li { margin-left: 20px; }
+.menu a { color: #FFF; display: inline-block; padding: 19px 0; font-size: 24px; border-bottom: 4px solid #fff; border-bottom-color: #00794C; }
+.menu a.current { border-bottom-color: #FFF; }
 
-strong {
-    font-weight: 700;
-}
+.container { width: 984px; margin: 0 auto; }
+.content { padding: 40px 20px; background: #fff; border-left: 1px solid #979797; border-right: 1px solid #979797; }
 
-ul {
-  list-style-type: none;
-}
+.boxcontainer { display: flex; flex-wrap: wrap; justify-content: space-around; margin-bottom: 40px; }
 
-label {
-    font-size: 14px;
-}
+.box { font-size: 32px; text-align: center; width: 300px; padding: 40px 0; cursor: pointer; }
+.box i { display: block; color: #FFF; font-size: 64px; margin-bottom: 25px; }
 
-input[type="text"] {
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-}
+.box-green { background: #00794C; color: #FFF; }
 
-.btn {
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    background: #fff;
-    font-weight: 700;
-    border-radius: 2px;
-    cursor: pointer;
-}
+.content ul { margin-bottom: 40px; }
+.content li { border-bottom: 1px solid #979797; padding: 15px 0; }
+.content li:nth-child(2n) { background: #FAFAFA; }
+.content li:last-child { border-bottom: none; }
+.abgeschlossen { color: #00794C; }
+.bearbeitung { color: #F6A623; }
+.offen { color: #D0011B; }
 
-.btn-green {
-    background: #00794C;
-    border: 1px solid #00794C;
-    color: #FFF;
-}
+.ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; }
+.ticket__overview > div { margin-right: 20px; }
+.ticket__overview > div:nth-child(5) { margin-right: 0; }
+.ticket__id { width: 60px; }
+.ticket__title { width: 180px; }
+.ticket__description { width: 370px; }
+.ticket__customer { width: 160px; }
+.ticket__status { width: 130px; }
+.ticket__expander { display: none; cursor: auto; width: 100%; padding: 15px 0; border-top: 1px dashed #979797; }
 
-.btn-red {
-    background: #D0011B;
-    border: 1px solid #D0011B;
-    color: #FFF;
-}
-
-.btn-orange {
-    background: #F6A623;
-    border: 1px solid #F6A623;
-    color: #FFF;
-}
-
-header {
-  background: #00794C;
-}
-
-header .container::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-.logo {
-  float: left;
-  font-size: 36px;
-  font-weight: 700;
-  color: #FFF;
-  padding: 13px 0;
-}
-
-.menu{
-  float: right;
-}
-.menu ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-.menu li {
-  margin-left: 20px;
-}
-.menu a {
-  color: #FFF;
-  display: inline-block;
-  padding: 19px 0;
-  font-size: 24px;
-  border-bottom: 4px solid #fff;
-  border-bottom-color: #00794C;
-}
-.menu a.current {
-  border-bottom-color: #FFF;
-}
-
-.container {
-  width: 984px;
-  margin: 0 auto;
-}
-.content {
-  padding: 40px 20px;
-  background: #fff;
-  border-left: 1px solid #979797;
-  border-right: 1px solid #979797;
-}
-
-.boxcontainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 40px;
-}
-
-.box {
-  font-size: 32px;
-  text-align: center;
-  width: 300px;
-  padding: 40px 0;
-  cursor: pointer;
-}
-
-.box i {
-  display: block;
-  color: #FFF;
-  font-size: 64px;
-  margin-bottom: 25px;
-}
-
-.box-green {
-      background: #00794C;
-      color: #FFF;
-}
-
-.ticket__item {
-  border-bottom: 1px solid #979797;
-}
-.ticket__overview {
-  display: flex;
-  flex-wrap: wrap;
-  cursor: pointer;
-  padding: 15px 0;
-}
-.ticket__item:nth-child(2n) {
-    background: #FAFAFA;
-}
-.ticket__item:last-child {
-  border-bottom: 0;
-}
-.ticket__overview > div {
-  margin-right: 20px;
-}
-.ticket__overview > div:nth-child(5) {
-  margin-right: 0;
-}
-.ticket__id {
-  width: 60px;
-}
-.ticket__title {
-  width: 180px;
-}
-.ticket__description {
-  width: 370px;
-}
-.ticket__customer {
-  width: 160px;
-}
-.ticket__status {
-  width: 130px;
-}
-.ticket__status.abgeschlossen {
-  color: #00794C;
-}
-.ticket__status.bearbeitung {
-  color: #F6A623;
-}
-.ticket__status.offen {
-  color: #D0011B;
-}
-.ticket__expander {
-  display: none;
-  cursor: auto;
-  width: 100%;
-  padding: 15px 0;
-  border-top: 1px dashed #979797;
-}
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; }
+.overlay.show { display: table; }
+.overlay > .outerwrapper > div { display: none; max-width: 400px; margin: 0 auto; background: #FFF; padding: 40px;}
+.overlay > .outerwrapper > div.show { display: block; }
+.overlay .success span { font-weight: bold; }
