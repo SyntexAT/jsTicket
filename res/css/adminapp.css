@@ -4,7 +4,7 @@
 .innerwrapper { max-width: 400px; margin: 0 auto; }
 
 .login, .register { background: #fff; padding: 40px; border: 1px solid #D5D5D5; border-bottom: 2px solid #00794C; }
-.register { border-bottom: 1px solid #D5D5D5; }
+.register { display: none; border-bottom: 1px solid #D5D5D5; }
 
 .login h1,
 .register h1 { font-size: 48px; text-align: center; margin-bottom: 30px; }
@@ -13,6 +13,7 @@
 .register label { display: block; margin-bottom: 5px; }
 
 .register-info {
+  display: none;
     background: #FAFAFA;
     padding: 30px 40px;
     font-size: 14px;

@@ -59,11 +59,9 @@ app.put('/login/:id', function(req,res) {
     }
 
     if (userFound == 1) {
-      console.log('found');
       res.writeHead(200, {'Content-Type':'application/json'});
       res.end(JSON.stringify(hash));
     } else {
-      console.log('notfound');
       res.writeHead(404, {'Content-Type':'application/json'});
       res.end(JSON.stringify({error:'Keine Firmeninstanz zu diesem Hash gefunden!' + hash}));
     }
@@ -106,7 +104,12 @@ app.post('/kunde',function(req,res) {
       res.writeHead(409, {'Content-Type':'application/json'});
       res.end(JSON.stringify({error:'Kunde schon vorhanden!'}));
     } else {
+      var cusID = 1;
+      for(var i in dataDev[devHash].customer){
+        cusID++;
+      }
       dataDev[devHash].customer[cusHash] = {
+        id: cusID,
         name: req.body.name,
         address: req.body.address,
         zip: req.body.zip,
@@ -129,7 +132,6 @@ app.get('/kunde/:dev/:id',function(req,res) {
   var devHash = req.params.dev;
   getJsonData('tickets.json', function(data){
     var customerDetail = data.data[devHash].customer[id];
-    console.log(customerDetail);
     res.writeHead(200, {'Content-Type':'application/json'});
     res.end(JSON.stringify(customerDetail));
   });
@@ -148,7 +150,14 @@ app.post('/ticket', function(req, res) {
   getJsonData('tickets.json', function(data) {
     var openTickets = data.data[req.body.devHash].customer[req.body.cusHash].tickets;
     openTickets++;
+    var ticketID = data.data[req.body.devHash].tickets.length;
+    ticketID++
     data.data[req.body.devHash].customer[req.body.cusHash].tickets = openTickets;
+    req.body.status = 'offen';
+    req.body.customer = data.data[req.body.devHash].customer[req.body.cusHash].name;
+    req.body.id = ticketID;
+    req.body.notes = [];
+    req.body.fulltime = 0;
     data.data[req.body.devHash].tickets.push(req.body);
     writeJsonData('tickets.json', data);
     res.writeHead(200, {'Content-Type':'application/json'});
@@ -160,9 +169,119 @@ app.get('/tickets/:dev/:id', function(req, res){
   var dev = req.params.dev;
   var id = req.params.id;
   getJsonData('tickets.json', function(data){
-    console.log(data.data[dev].tickets);
     res.writeHead(200, {'Content-Type':'application/json'});
     res.end(JSON.stringify(data.data[dev].tickets));
+  });
+});
+
+app.get('/tickets/:dev', function(req, res){
+  var dev = req.params.dev;
+  getJsonData('tickets.json', function(data){
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify(data.data[dev].tickets));
+  });
+});
+
+app.put('/ticket/bearbeiten/:cus/:id', function(req, res){
+  var cusHash = req.params.cus;
+  var ticketID = req.params.id*1-1;
+  console.log(cusHash, ticketID);
+  getJsonData('tickets.json', function(data) {
+    for( var i in data.data ){
+      if(data.data[i].tickets[ticketID].cusHash == cusHash){
+        data.data[i].tickets[ticketID].status = req.body.status;
+        if(req.body.status == 'abgeschlossen'){
+          data.data[i].customer[cusHash].tickets = data.data[i].customer[cusHash].tickets-1;
+        }
+        var ticketNote = {
+          time: req.body.time,
+          note: req.body.note
+        };
+        data.data[i].tickets[ticketID].fulltime = Math.round(((data.data[i].tickets[ticketID].fulltime*1)+(req.body.time*1))*100)/100;
+        data.data[i].tickets[ticketID].notes.push(ticketNote);
+      }
+    }
+    writeJsonData('tickets.json', data);
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify(data));
+  })
+})
+
+app.delete('/ticket/stornieren/:cus/:id', function(req, res) {
+  var cusHash = req.params.cus;
+  var ticketID = req.params.id*1-1;
+  console.log(cusHash,ticketID);
+  getJsonData('tickets.json', function(data) {
+    for( var i in data.data ){
+      if(data.data[i].tickets[ticketID].cusHash == cusHash){
+        data.data[i].tickets[ticketID].status = "storniert";
+        data.data[i].customer[cusHash].tickets = data.data[i].customer[cusHash].tickets-1;
+      }
+    }
+    writeJsonData('tickets.json', data);
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify(data));
+  })
+});
+
+app.get('/rechnungen/:dev', function(req, res){
+  var devHash = req.params.dev;
+  getJsonData('tickets.json', function(data){
+    var invoices = data.data[devHash].invoices;
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify(invoices));
+  })
+});
+app.get('/rechnungen/:dev/:cus', function(req, res){
+  var devHash = req.params.dev;
+  var cusHash = req.params.cus;
+  getJsonData('tickets.json', function(data){
+    var invoices = [];
+    for(var i in data.data[devHash].invoices) {
+      if(data.data[devHash].invoices[i].cusHash == cusHash){
+        invoices.push(data.data[devHash].invoices[i]);
+      }
+    }
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify(invoices));
+  })
+});
+
+app.get('/rechnung/:dev/:cus', function(req, res) {
+  var devHash = req.params.dev;
+  var cusHash = req.params.cus;
+  getJsonData('tickets.json', function(data){
+    var developerData = data.data[devHash].developer;
+    var customerData = data.data[devHash].customer[cusHash];
+    var ticketsData = data.data[devHash].tickets;
+    var ticketsTime = 0;
+    var invoiceData = {
+      cusHash: cusHash,
+      nr: data.data[devHash].invoices.length + 1,
+      developer: developerData,
+      customer: customerData,
+      tickets: [],
+      date: new Date(),
+      hours: 0,
+      total: 0
+    };
+    for(var i in ticketsData){
+      if(ticketsData[i].cusHash == cusHash && ticketsData[i].status == 'abgeschlossen'){
+        ticketsData[i].status = 'verrechnet';
+        var ticketInfo = {
+          id: ticketsData[i].id,
+          name: ticketsData[i].name,
+          fulltime: ticketsData[i].fulltime
+        }
+        invoiceData.tickets.push(ticketInfo);
+        invoiceData.hours = invoiceData.hours + ticketsData[i].fulltime;
+      }
+    }
+    invoiceData.total = invoiceData.hours*customerData.rate;
+    data.data[devHash].invoices.push(invoiceData);
+    writeJsonData('tickets.json', data);
+    res.writeHead(200, {'Content-Type':'application/json'});
+    res.end(JSON.stringify(invoiceData));
   });
 });
 

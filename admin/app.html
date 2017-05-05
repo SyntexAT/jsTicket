@@ -2,303 +2,194 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - jsTicket</title>
-    <link href="../res/css/adminapp.css" rel="stylesheet">
-    <script src="../res/js/jquery-3.2.1.min.js"></script>
-    <script src="../res/js/forall.js"></script>
+  <meta charset="UTF-8">
+  <title>Dashboard - jsTicket</title>
+  <link href="../res/css/adminapp.css" rel="stylesheet">
+  <script src="../res/js/jquery-3.2.1.min.js"></script>
+  <script src="../res/js/jquery.hideseek.min.js"></script>
+  <script src="../res/js/jspdf.min.js"></script>
+  <script src="../res/js/forall.js"></script>
 </head>
 
 <body>
-    <header>
-      <div class="container">
+  <header>
+    <div class="container">
 
-        <div class="logo">
-            jsTickets
-        </div>
-        <nav class="menu">
-            <ul>
-                <li><a href="dashboard" class="current">Dashboard</a></li>
-                <li><a href="customer">Kunden</a></li>
-                <li><a href="tickets">Tickets</a></li>
-                <li><a href="settings">Einstellungen</a></li>
-            </ul>
-        </nav>
+      <div class="logo">
+        jsTicket
       </div>
-    </header>
-    <div class="content container">
-      <div class="dashboard">
-<h1>Dashboard</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<div class="boxcontainer">
+      <nav class="menu">
+        <ul>
+          <li><a href="dashboard" class="dashboard current">Dashboard</a></li>
+          <li><a href="customer" class="customer">Kunden</a></li>
+          <li><a href="tickets" class="tickets">Tickets</a></li>
+          <li><a href="invoices" class="invoices">Rechnungen</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="content container">
+    <div class="dashboard show">
+      <h1>Dashboard</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div class="boxcontainer">
 
-<div class="box box-green box-customer">
-  <i class="fa fa-user" aria-hidden="true"></i>
-  Kunden
-</div>
-<div class="box box-green box-tickets">
-    <i class="fa fa-ticket" aria-hidden="true"></i>
-    Tickets
-</div>
-<div class="box box-green box-settings">
-  <i class="fa fa-cog" aria-hidden="true"></i>
-  Einstellungen
-</div>
-</div>
-<h2>Letzten 5 Tickets</h2>
-<ul class="ticket__list">
-  <li class="ticket__item">
-    <div class="ticket__overview">
-    <div class="ticket__id">
-      #9999
+        <a href="customer">
+          <div class="box box-green box-customer">
+            <i class="fa fa-user" aria-hidden="true"></i> Kunden
+          </div>
+        </a>
+        <a href="tickets">
+          <div class="box box-green box-tickets">
+            <i class="fa fa-ticket" aria-hidden="true"></i> Tickets
+          </div>
+        </a>
+        <a href="invoices">
+          <div class="box box-green box-settings">
+            <i class="fa fa-eur" aria-hidden="true"></i> Rechnungen
+          </div>
+        </a>
+      </div>
+      <h2>Letzten 5 Tickets</h2>
+      <ul class="ticket__list last-5">
+      </ul>
     </div>
-    <div class="ticket__title">
-      Titel vom Ticket
+    <div class="customer">
+      <h1>Kunden</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <ul class="customer__list">
+      </ul>
+      <button class="btn btn-green add-new-customer">Neuen Kunden anlegen</button>
     </div>
-    <div class="ticket__description">
-      Die Beschreibung beschreibt die Beschreibung vom Ticket, weil das Ticket eine Beschreibung braucht.
+    <div class="customer-detail">
+      <h1 class="customer-detail__name"></h1>
+      <h2>Übersicht</h2>
+      <table>
+        <tr>
+          <td><strong>Adresse:</strong></td>
+          <td class="customer-detail__address"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="customer-detail__zip"></td>
+        </tr>
+        <tr>
+          <td><strong>Kontaktperson:</strong></td>
+          <td class="customer-detail__person"></td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td class="customer-detail__email"></td>
+        </tr>
+        <tr>
+          <td><strong>Telefonnummer:</strong></td>
+          <td class="customer-detail__telefon"></td>
+        </tr>
+        <tr>
+          <td><strong>Stundensatz:</strong></td>
+          <td class="customer-detail__rate"></td>
+        </tr>
+      </table>
+      <h2>Offene Tickets</h2>
+      <ul class="ticket__list open">
+
+      </ul>
+      <button class="btn btn-green add-new-ticket">Neues Ticket anlegen</button>
+      <h2>Abgeschlossene Tickets</h2>
+      <ul class="ticket__list closed">
+
+      </ul>
+      <button class="btn btn-green create-invoice">Rechnung erstellen</button>
+      <h2>Rechnungen</h2>
+      <ul class="invoice__list">
+      </ul>
     </div>
-    <div class="ticket__customer">
-      Kundenname
+    <div class="tickets">
+      <h1>Tickets</h1>
+      <!--
+      <input type="text" id="ticketsearch" placeholder="Ticket Suche" data-list=".ticket__list" autocomplete="off" />
+    -->
+      <ul class="ticket__list">
+
+      </ul>
     </div>
-    <div class="ticket__status abgeschlossen">
-      abgeschlossen
+    <div class="invoices">
+      <h1>Rechnung erstellen</h1>
+      <canvas id="invoice" width="803" height="1188"></canvas>
+      <button class="btn btn-green save-pdf">Rechnung als PDF speichern</button>
+    </div>
+    <div class="settings">
+
     </div>
   </div>
-    <div class="ticket__expander">
-      <strong>geschätzte Arbeitszeit:</strong> 30 Stunden<br>
-      <strong>Arbeitszeit:</strong> 35 Stunden<br>
-      <strong>Notiz:</strong> Notizen für das Ticket, um zu verstehen was passiert ist oder auch nicht, das wissen nur die Entwickler...<br>
-      <br>
-      <button class="btn btn-green">abschließen</button>
-      <button class="btn btn-orange">bearbeiten</button>
-      <button class="btn btn-red">stornieren</button>
-    </div>
-  </li>
-    <li class="ticket__item">
-      <div class="ticket__overview">
-      <div class="ticket__id">
-        #9999
-      </div>
-      <div class="ticket__title">
-        Titel vom Ticket
-      </div>
-      <div class="ticket__description">
-        Die Beschreibung beschreibt die Beschreibung vom Ticket, weil das Ticket eine Beschreibung braucht.
-      </div>
-      <div class="ticket__customer">
-        Kundenname
-      </div>
-      <div class="ticket__status abgeschlossen">
-        abgeschlossen
-      </div>
-    </div>
-      <div class="ticket__expander">
-        <strong>geschätzte Arbeitszeit:</strong> 30 Stunden<br>
-        <strong>Arbeitszeit:</strong> 35 Stunden<br>
-        <strong>Notiz:</strong> Notizen für das Ticket, um zu verstehen was passiert ist oder auch nicht, das wissen nur die Entwickler...<br>
-        <br>
-        <button class="btn btn-green">abschließen</button>
-        <button class="btn btn-orange">bearbeiten</button>
-        <button class="btn btn-red">stornieren</button>
-      </div>
-    </li>
-      <li class="ticket__item">
-        <div class="ticket__overview">
-          <div class="ticket__id">
-          #9999
-        </div>
-        <div class="ticket__title">
-          Titel vom Ticket
-        </div>
-        <div class="ticket__description">
-          Die Beschreibung beschreibt die Beschreibung vom Ticket, weil das Ticket eine Beschreibung braucht.
-        </div>
-        <div class="ticket__customer">
-          Kundenname
-        </div>
-        <div class="ticket__status bearbeitung">
-          In Bearbeitung
-        </div>
-      </div>
-        <div class="ticket__expander">
-          <strong>geschätzte Arbeitszeit:</strong> 30 Stunden<br>
-          <strong>Arbeitszeit:</strong> 35 Stunden<br>
-          <strong>Notiz:</strong> Notizen für das Ticket, um zu verstehen was passiert ist oder auch nicht, das wissen nur die Entwickler...<br>
-          <br>
-          <button class="btn btn-green">abschließen</button>
-          <button class="btn btn-orange">bearbeiten</button>
-          <button class="btn btn-red">stornieren</button>
-        </div>
-      </li>
-        <li class="ticket__item">
-          <div class="ticket__overview">
-          <div class="ticket__id">
-            #9999
-          </div>
-          <div class="ticket__title">
-            Titel vom Ticket
-          </div>
-          <div class="ticket__description">
-            Die Beschreibung beschreibt die Beschreibung vom Ticket, weil das Ticket eine Beschreibung braucht.
-          </div>
-          <div class="ticket__customer">
-            Kundenname
-          </div>
-          <div class="ticket__status offen">
-            offen
-          </div>
-        </div>
-          <div class="ticket__expander">
-            <strong>geschätzte Arbeitszeit:</strong> 30 Stunden<br>
-            <strong>Arbeitszeit:</strong> 35 Stunden<br>
-            <strong>Notiz:</strong> Notizen für das Ticket, um zu verstehen was passiert ist oder auch nicht, das wissen nur die Entwickler...<br>
-            <br>
-            <button class="btn btn-green">abschließen</button>
-            <button class="btn btn-orange">bearbeiten</button>
-            <button class="btn btn-red">stornieren</button>
-          </div>
-        </li>
-          <li class="ticket__item">
-            <div class="ticket__overview">
-            <div class="ticket__id">
-              #9999
-            </div>
-            <div class="ticket__title">
-              Titel vom Ticket
-            </div>
-            <div class="ticket__description">
-              Die Beschreibung beschreibt die Beschreibung vom Ticket, weil das Ticket eine Beschreibung braucht.
-            </div>
-            <div class="ticket__customer">
-              Kundenname
-            </div>
-            <div class="ticket__status abgeschlossen">
-              abgeschlossen
-            </div>
-          </div>
-            <div class="ticket__expander">
-              <strong>geschätzte Arbeitszeit:</strong> 30 Stunden<br>
-              <strong>Arbeitszeit:</strong> 35 Stunden<br>
-              <strong>Notiz:</strong> Notizen für das Ticket, um zu verstehen was passiert ist oder auch nicht, das wissen nur die Entwickler...<br>
-              <br>
-              <button class="btn btn-green">abschließen</button>
-              <button class="btn btn-orange">bearbeiten</button>
-              <button class="btn btn-red">stornieren</button>
-            </div>
-          </li>
-</ul>
-      </div>
-      <div class="customer">
-        <h1>Kunden</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <ul class="customer__list">
-        </ul>
-        <button class="btn btn-green add-new-customer">Neuen Kunden anlegen</button>
-        <div class="overlay">
-          <div class="outerwrapper">
-            <div class="add-customer">
-              <h2>Kunden anlegen</h2>
-              <form class="addcustomer__form">
-                <label for="addcustomer__name">Kundenname</label>
-                <input type="text" id="addcustomer__name" class="addcustomer__name"/>
-                <label for="addcustomer__adress">Adresse</label>
-                <input type="text" id="addcustomer__adress" class="addcustomer__adress"/>
-                <label for="addcustomer__zip">PLZ</label>
-                <input type="text" id="addcustomer__zip" class="addcustomer__zip"/>
-                <label for="addcustomer__city">Ort</label>
-                <input type="text" id="addcustomer__city" class="addcustomer__city"/>
-                <label for="addcustomer__contactperson">Kontaktperson</label>
-                <input type="text" id="addcustomer__contactperson" class="addcustomer__contactperson"/>
-                <label for="addcustomer__email">Email</label>
-                <input type="text" id="addcustomer__email" class="addcustomer__email"/>
-                <label for="addcustomer__telefon">Telefonnummer</label>
-                <input type="text" id="addcustomer__telefon" class="addcustomer__telefon"/>
-                <label for="addcustomer__rate">Stundensatz</label>
-                <input type="text" id="addcustomer__rate" class="addcustomer__rate"/>
-                <button class="btn btn-green">Kunden erstellen</button>
-              </form>
-            </div>
-            <div class="success">
-              <h2>Kunde angelegt</h2>
-              <p>Der Kunde <span></span> wurde erfolgreich angelegt!</p>
-              <button class="hide-overlay btn btn-green">OK</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="customer-detail">
-        <h1 class="customer-detail__name"></h1>
-        <h2>Übersicht</h2>
-        <table>
-          <tr>
-            <td><strong>Adresse:</strong></td>
-            <td class="customer-detail__address"></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="customer-detail__zip"></td>
-          </tr>
-          <tr>
-              <td><strong>Kontaktperson:</strong></td>
-              <td class="customer-detail__person"></td>
-          </tr>
-          <tr>
-              <td><strong>Email:</strong></td>
-              <td class="customer-detail__email"></td>
-          </tr>
-          <tr>
-            <td><strong>Telefonnummer:</strong></td>
-            <td class="customer-detail__telefon"></td>
-          </tr>
-          <tr>
-            <td><strong>Stundensatz:</strong></td>
-            <td class="customer-detail__rate"></td>
-          </tr>
-        </table>
-        <h2>Offene Tickets</h2>
-        <ul class="ticket__list open">
 
-        </ul>
-        <button class="btn btn-green add-new-ticket">Neues Ticket anlegen</button>
-        <h2>Abgeschlossene Tickets</h2>
-        <ul class="ticket__list closed">
-
-        </ul>
-        <button class="btn btn-green create-invoice">Rechnung erstellen</button>
-        <div class="overlay">
-            <div class="outerwrapper">
-              <div class="add-ticket">
-                <h2>Ticket anlegen</h2>
-                <form class="addticket__form">
-                  <label for="addticket__name">Titel</label>
-                  <input type="text" id="addticket__name" class="addticket__name"/>
-                  <label for="addticket__description">Beschreibung</label>
-                  <textarea id="addticket__description" class="addticket__description"></textarea>
-                  <label for="addticket__offered">Angebotene Zeit</label>
-                  <input type="text" id="addticket__offered" class="addticket__offered"/>
-                  <button class="btn btn-green">Ticket erstellen</button>
-                </form>
-              </div>
-              <div class="success">
-                <h2>Ticket angelegt</h2>
-                <p>Das Ticket mit der Nummer <span class="ticket-nr"></span> wurde erfolgreich angelegt!</p>
-                <button class="hide-overlay btn btn-green">OK</button>
-              </div>
-            </div>
-        </div>
+  <div class="overlay">
+    <div class="outerwrapper">
+      <div class="add-customer">
+        <h2>Kunden anlegen</h2>
+        <form class="addcustomer__form">
+          <label for="addcustomer__name">Kundenname</label>
+          <input type="text" id="addcustomer__name" class="addcustomer__name" />
+          <label for="addcustomer__adress">Adresse</label>
+          <input type="text" id="addcustomer__adress" class="addcustomer__adress" />
+          <label for="addcustomer__zip">PLZ</label>
+          <input type="text" id="addcustomer__zip" class="addcustomer__zip" />
+          <label for="addcustomer__city">Ort</label>
+          <input type="text" id="addcustomer__city" class="addcustomer__city" />
+          <label for="addcustomer__contactperson">Kontaktperson</label>
+          <input type="text" id="addcustomer__contactperson" class="addcustomer__contactperson" />
+          <label for="addcustomer__email">Email</label>
+          <input type="text" id="addcustomer__email" class="addcustomer__email" />
+          <label for="addcustomer__telefon">Telefonnummer</label>
+          <input type="text" id="addcustomer__telefon" class="addcustomer__telefon" />
+          <label for="addcustomer__rate">Stundensatz</label>
+          <input type="text" id="addcustomer__rate" class="addcustomer__rate" />
+          <button class="btn btn-green">Kunden erstellen</button>
+        </form>
       </div>
-      <div class="tickets">
-        <h1>Tickets</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <ul class="ticket__list">
-
-        </ul>
+      <div class="add-customer-success success">
+        <h2>Kunde angelegt</h2>
+        <p>Der Kunde <span></span> wurde erfolgreich angelegt!</p>
+        <button class="hide-overlay btn btn-green">OK</button>
       </div>
-      <div class="settings">
-
+      <div class="add-ticket">
+        <h2>Ticket anlegen</h2>
+        <form class="addticket__form">
+          <label for="addticket__name">Titel</label>
+          <input type="text" id="addticket__name" class="addticket__name" />
+          <label for="addticket__description">Beschreibung</label>
+          <textarea id="addticket__description" class="addticket__description"></textarea>
+          <label for="addticket__offered">Angebotene Zeit</label>
+          <input type="text" id="addticket__offered" class="addticket__offered" />
+          <button class="btn btn-green">Ticket anlegen</button>
+        </form>
+      </div>
+      <div class="add-ticket-success success">
+        <h2>Ticket angelegt</h2>
+        <p>Das Ticket mit der Nummer <span class="ticket-nr"></span> wurde erfolgreich angelegt!</p>
+        <button class="hide-overlay btn btn-green">OK</button>
+      </div>
+      <div class="edit-ticket">
+        <h2>Zeit buchen</h2>
+        <form class="editticket__form">
+          <h3></h3>
+          <label for="editticket__status">Status</label>
+          <select class="editticket__status" id="editticket__status">
+            <option value="offen">offen</option>
+            <option value="in Bearbeitung">in Bearbeitung</option>
+            <option value="abgeschlossen">abgeschlossen</option>
+          </select>
+          <label for="editticket__workedtime">Arbeitszeit</label>
+          <input type="text" id="editticket__workedtime" class="editticket__workedtime" />
+          <label for="editticket__note">Notiz</label>
+          <textarea id="editticket__note" class="editticket__note"></textarea>
+          <button class="btn btn-green">Zeit buchen</button>
+        </form>
       </div>
     </div>
+  </div>
 </body>
 
 </html>

@@ -23,6 +23,7 @@ $border-lightgray: #D5D5D5;
 body { background: #eee; }
 h1 { font-size: 36px; font-weight: 600; color: #00794C; margin-bottom: 20px; }
 h2 { font-size: 32px; color: #00794C; margin-bottom: 20px; }
+h3 { font-size: 20px; color: #00794C; margin-bottom: 20px; }
 p { margin-bottom: 1em; }
 a { color: #00794C; text-decoration: none; }
 i, em { font-style: italic; }
@@ -34,6 +35,8 @@ form input, form textarea { width: calc(100% - 32px); margin-bottom: 10px; }
 form button { width: 100%; }
 input[type="text"] { padding: 10px 15px; border: 1px solid #ccc; }
 textarea { padding: 10px 15px; border: 1px solid #ccc; resize: none; height: 5em;}
+select { width: 100%; padding: 10px 15px; margin-bottom: 10px; }
+table tr td:first-child { width: 150px; }
 
 .btn { padding: 10px 15px; border: 1px solid #ccc; background: #fff; font-weight: 700; border-radius: 2px; cursor: pointer; }
 .btn-green { background: #00794C; border: 1px solid #00794C; color: #FFF; }
@@ -61,26 +64,42 @@ header .container::after { content: ''; display: block; clear: both; }
 
 .box-green { background: #00794C; color: #FFF; }
 
+.content > div { display: none; }
+.content > .show { display: block; }
 .content ul { margin-bottom: 40px; }
 .content li { border-bottom: 1px solid #979797; padding: 15px 0; }
 .content li:nth-child(2n) { background: #FAFAFA; }
 .content li:last-child { border-bottom: none; }
-.abgeschlossen { color: #00794C; }
-.bearbeitung { color: #F6A623; }
+.abgeschlossen, .verrechnet { color: #00794C; }
+.bearbeitung, .Bearbeitung { color: #F6A623; }
 .offen { color: #D0011B; }
+.storniert
 
-.ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; }
+.ticket__item { padding: 15px 0 0 !important; }
+.ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; margin-bottom: 15px;}
 .ticket__overview > div { margin-right: 20px; }
 .ticket__overview > div:nth-child(5) { margin-right: 0; }
 .ticket__id { width: 60px; }
-.ticket__title { width: 180px; }
-.ticket__description { width: 370px; }
+.ticket__title { width: 200px; }
+.ticket__description { width: 350px; }
 .ticket__customer { width: 160px; }
 .ticket__status { width: 130px; }
 .ticket__expander { display: none; cursor: auto; width: 100%; padding: 15px 0; border-top: 1px dashed #979797; }
+.ticket__expander .btn {margin-top: 10px; margin-right: 10px}
+.ticket__expander ul {margin-bottom: 0;}
+
+.invoice__item { display: flex; }
+.invoice__id { width: 150px; font-weight: bold; color: #00794C; }
+.invoice__total { width: 150px;}
+.invoice__date { width: 210px; }
+
+.customer-detail .ticket__customer { display: none; }
+.customer-detail .ticket__description {width: 510px; }
 
 .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; }
 .overlay.show { display: table; }
 .overlay > .outerwrapper > div { display: none; max-width: 400px; margin: 0 auto; background: #FFF; padding: 40px;}
 .overlay > .outerwrapper > div.show { display: block; }
 .overlay .success span { font-weight: bold; }
+
+canvas { display: block; margin: 35px auto; border: 1px solid; }
