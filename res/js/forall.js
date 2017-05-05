@@ -85,7 +85,7 @@ $(document).ready(function() {
     getLast5Tickets(developerHash);
     getCustomersList(developerHash);
     getOpenTickets(developerHash);
-    $('#ticketsearch').hideseek();
+    //$('#ticketsearch').hideseek();
   });
 
   /*
@@ -558,13 +558,13 @@ $(document).ready(function() {
         $('.content .invoices').addClass('show');
       }
     });
-  })
+  });
 
   $(document).on('click','.save-pdf', function(){
     var doc = new jsPDF();
     doc.addImage(invoiceImageURL, 'JPEG', 0, 0, 210, 297);
     doc.save('Rechnung_'+invoiceNr+'.pdf')
-  })
+  });
 
   var getInvoices = function(){
     var devHash = arguments[0];
@@ -579,7 +579,7 @@ $(document).ready(function() {
             var iDate = new Date(data[i].date);
             var iLI = $('<li>').addClass('invoice__item').appendTo('.invoice__list');
             $('<div>').addClass('invoice__id').html('Rechnung Nr.' + data[i].nr).appendTo(iLI);
-            $('<div>').addClass('invoice__total').html(parseFloat(data[i].total).toFixed(2)).appendTo(iLI);
+            $('<div>').addClass('invoice__total').html(parseFloat(data[i].total).toFixed(2)+'€').appendTo(iLI);
             $('<div>').addClass('invoice__date').html('Rechnungsdatum: '+iDate.getDate() + '.' + (iDate.getMonth()+1) + '.'+iDate.getFullYear()).appendTo(iLI);
           }
         }
@@ -593,7 +593,12 @@ $(document).ready(function() {
         }
       })
     }
-  }
+  };
+
+    $(document).on('click', '.fa-times', function(e) {
+        e.preventDefault();
+        $('.overlay.show, .overlay .show').removeClass('show');
+    });
 
   getLast5Tickets(developerHash);
   getCustomersList(developerHash);

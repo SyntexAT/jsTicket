@@ -73,10 +73,10 @@ header .container::after { content: ''; display: block; clear: both; }
 .abgeschlossen, .verrechnet { color: #00794C; }
 .bearbeitung, .Bearbeitung { color: #F6A623; }
 .offen { color: #D0011B; }
-.storniert
+.storniert {}
 
 .ticket__item { padding: 15px 0 0 !important; }
-.ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; margin-bottom: 15px;}
+.ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; padding-bottom: 15px;}
 .ticket__overview > div { margin-right: 20px; }
 .ticket__overview > div:nth-child(5) { margin-right: 0; }
 .ticket__id { width: 60px; }
@@ -90,7 +90,7 @@ header .container::after { content: ''; display: block; clear: both; }
 
 .invoice__item { display: flex; }
 .invoice__id { width: 150px; font-weight: bold; color: #00794C; }
-.invoice__total { width: 150px;}
+.invoice__total { width: 60px; text-align: right; margin-right: 20px; }
 .invoice__date { width: 210px; }
 
 .customer-detail .ticket__customer { display: none; }
@@ -98,8 +98,10 @@ header .container::after { content: ''; display: block; clear: both; }
 
 .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; }
 .overlay.show { display: table; }
-.overlay > .outerwrapper > div { display: none; max-width: 400px; margin: 0 auto; background: #FFF; padding: 40px;}
+.overlay > .outerwrapper > div { position: relative; display: none; max-width: 400px; margin: 0 auto; background: #FFF; padding: 40px;}
 .overlay > .outerwrapper > div.show { display: block; }
 .overlay .success span { font-weight: bold; }
+
+.fa-times { cursor: pointer; position: absolute; top: 20px; right: 20px;}
 
 canvas { display: block; margin: 35px auto; border: 1px solid; }
