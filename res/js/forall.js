@@ -17,6 +17,15 @@ $(document).ready(function() {
   }
 
   /*
+    Logout
+  */
+  $(document).on('click', 'a[href="logout"]', function(e){
+    e.preventDefault();
+    localStorage.clear();
+    window.location = "login.html";
+  })
+
+  /*
     Verstecken von overlay
   */
   $('.hide-overlay').on('click', function(e) {
@@ -384,22 +393,29 @@ $(document).ready(function() {
           var customer = data[i].customer;
           var status = data[i].status;
           var offered = data[i].offered;
-
-          if (data[i].status != 'abgeschlossen' && data[i].status != 'storniert') {
-            var otLI = $('<li>').addClass('ticket__item').appendTo('.tickets .ticket__list');
+          var processPercent = Math.round(data[i].fulltime*100/offered);
+            var otLI = $('<li>').addClass('ticket__item').attr({'data-status':data[i].status}).appendTo('.tickets .ticket__list');
             var otOverview = $('<div>').addClass('ticket__overview')
               .on('click', function() {
                 $(this).next().slideToggle();
               }).appendTo(otLI);
             $('<div>').addClass('ticket__id').html('#' + data[i].id).appendTo(otOverview);
             $('<div>').addClass('ticket__title').html(data[i].name).appendTo(otOverview);
-            $('<div>').addClass('ticket__description').html(data[i].description).appendTo(otOverview);
+            var processOuter = $('<div>').addClass('ticket__process').html('<span>'+processPercent+'%</span>').appendTo(otOverview);
+            var processSpanWidth = processOuter.find('span').width();
+            if(processPercent > 100){
+              $('<div>').addClass('ticket__processbar').css({'width':'100%', 'background':'#D0011B'}).appendTo(processOuter);
+            } else {
+              $('<div>').addClass('ticket__processbar').css({'width':processPercent+'%', 'background':'#00794C'}).appendTo(processOuter);
+            }
+            $('<div>').addClass('ticket__processcount').html(data[i].fulltime +' / '+offered).appendTo(otOverview);
             $('<div>').addClass('ticket__customer').html(data[i].customer).appendTo(otOverview);
             $('<div>').addClass('ticket__status ' + data[i].status).html(data[i].status).appendTo(otOverview);
             var otExpander = $('<div>').addClass('ticket__expander').appendTo(otLI);
+            $('<div>').addClass('ticket__description').html('<strong>Beschreibung:</strong><br>'+data[i].description).appendTo(otExpander);
             $('<strong>Angebotene Arbeitszeit:</strong> <span class="offered-time">' + offered + ' Stunden</span><br>').appendTo(otExpander);
-            if (data[i].worked < 0 && data[i].worked != 'undefined') {
-              $('<strong>Arbeitszeit:</strong> <span class="worked-time">' + data[i].worked + '</span><br>').appendTo(otExpander);
+            if (data[i].fulltime < 0 && data[i].fulltime != 'undefined') {
+              $('<strong>Arbeitszeit:</strong> <span class="worked-time">' + data[i].fulltime + '</span><br>').appendTo(otExpander);
             }
             if (data[i].notes.length > 0) {
               $('<strong>Notizen:</strong><br>').appendTo(otExpander);
@@ -408,34 +424,35 @@ $(document).ready(function() {
                 $('<li>').html(data[i].notes[j].note + ' - ' + data[i].notes[j].time + ' Stunden').appendTo(otUL);
               }
             }
-            $('<button>').addClass('btn btn-green').attr({
-                'data-ticket': data[i].id,
-                'data-customer': data[i].cusHash
-              }).html('Zeit buchen')
-              .on('click', function(e) {
-                e.preventDefault();
-                var ticketID = $(this).attr('data-ticket');
-                var tCusHash = $(this).attr('data-customer');
-                var ticket = $(this).parent().parent();
-                $('.overlay').toggleClass('show');
-                $('.overlay .edit-ticket').toggleClass('show');
-                $('.editticket__form').attr({
-                  'data-ticket': ticketID,
-                  'data-customer': tCusHash
-                });
-                $('.editticket__form h3').html('#' + ticketID + ' - ' + ticket.find('.ticket__title').html());
-                $('.editticket__status').val(ticket.find('.ticket__status').html());
-              }).appendTo(otExpander);
-            $('<button>').addClass('btn btn-red').attr({
-                'data-ticket': data[i].id,
-                'data-customer': data[i].cusHash
-              }).html('Ticket stornieren')
-              .on('click', function(e) {
-                e.preventDefault();
-                var ticketID = $(this).attr('data-ticket');
-                var tCusHash = $(this).attr('data-customer');
-                deleteTicket(tCusHash, ticketID);
-              }).appendTo(otExpander);
+            if(data[i].status != 'abgeschlossen' && data[i].status != 'storniert' && data[i].status != 'verrechnet'){
+              $('<button>').addClass('btn btn-green').attr({
+                  'data-ticket': data[i].id,
+                  'data-customer': data[i].cusHash
+                }).html('Zeit buchen')
+                .on('click', function(e) {
+                  e.preventDefault();
+                  var ticketID = $(this).attr('data-ticket');
+                  var tCusHash = $(this).attr('data-customer');
+                  var ticket = $(this).parent().parent();
+                  $('.overlay').toggleClass('show');
+                  $('.overlay .edit-ticket').toggleClass('show');
+                  $('.editticket__form').attr({
+                    'data-ticket': ticketID,
+                    'data-customer': tCusHash
+                  });
+                  $('.editticket__form h3').html('#' + ticketID + ' - ' + ticket.find('.ticket__title').html());
+                  $('.editticket__status').val(ticket.find('.ticket__status').html());
+                }).appendTo(otExpander);
+              $('<button>').addClass('btn btn-red').attr({
+                  'data-ticket': data[i].id,
+                  'data-customer': data[i].cusHash
+                }).html('Ticket stornieren')
+                .on('click', function(e) {
+                  e.preventDefault();
+                  var ticketID = $(this).attr('data-ticket');
+                  var tCusHash = $(this).attr('data-customer');
+                  deleteTicket(tCusHash, ticketID);
+                }).appendTo(otExpander);
           }
         }
       }
@@ -455,6 +472,8 @@ $(document).ready(function() {
       success: function(data) {
         $('.overlay, .overlay .edit-ticket').removeClass('show');
         getOpenTicketsFromCustomer(developerHash, cID);
+        getLast5Tickets(developerHash);
+        getOpenTickets(developerHash);
       }
     })
   })

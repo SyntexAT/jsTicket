@@ -77,11 +77,15 @@ header .container::after { content: ''; display: block; clear: both; }
 
 .ticket__item { padding: 15px 0 0 !important; }
 .ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; padding-bottom: 15px;}
-.ticket__overview > div { margin-right: 20px; }
-.ticket__overview > div:nth-child(5) { margin-right: 0; }
+.ticket__overview > div { margin-right: 22px; }
+.ticket__overview > div:nth-child(6) { margin-right: 0; }
 .ticket__id { width: 60px; }
-.ticket__title { width: 200px; }
-.ticket__description { width: 350px; }
+.ticket__title { width: 300px; }
+/*.ticket__description { width: 350px; }*/
+.ticket__process { position: relative; width: 120px; border: 1px solid #ccc; font-size: 10px; line-height: 22px; color: #FFF;text-align: center; border-radius: 5px; height: 22px; background: #ccc; }
+.ticket__process span { width: 30px; position: absolute; left: calc(50% - 15px); color: #FFF; line-height: 22px; }
+.ticket__processbar { height: 100%;color: #fff; }
+.ticket__processcount { width: 100px;}
 .ticket__customer { width: 160px; }
 .ticket__status { width: 130px; }
 .ticket__expander { display: none; cursor: auto; width: 100%; padding: 15px 0; border-top: 1px dashed #979797; }
