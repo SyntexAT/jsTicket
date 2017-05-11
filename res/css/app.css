@@ -1,5 +1,5 @@
 @import 'reset.css';
-@import 'font-awesome.min.css';
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700');
 
 /*
@@ -21,7 +21,7 @@ $border-lightgray: #D5D5D5;
 * { font-family: 'Open Sans', sans-serif; font-weight: 400; color: #4A4A4A; line-height: normal; }
 
 body { background: #eee; }
-h1 { font-size: 36px; font-weight: 600; color: #00794C; margin-bottom: 20px; }
+h1, h1 span { font-size: 36px; font-weight: 600; color: #00794C; margin-bottom: 20px; }
 h2 { font-size: 32px; color: #00794C; margin-bottom: 20px; }
 h3 { font-size: 20px; color: #00794C; margin-bottom: 20px; }
 p { margin-bottom: 1em; }
@@ -48,19 +48,20 @@ header .container::after { content: ''; display: block; clear: both; }
 
 .logo { float: left; font-size: 36px; font-weight: 700;color: #FFF; padding: 13px 0; }
 
-.menu{ float: right; }
+.menu{ display: block; float: right; }
 .menu ul { display: flex; flex-wrap: wrap; }
 .menu li { margin-left: 20px; }
 .menu a { color: #FFF; display: inline-block; padding: 19px 0; font-size: 24px; border-bottom: 4px solid #fff; border-bottom-color: #00794C; }
 .menu a.current { border-bottom-color: #FFF; }
 
 .container { width: 984px; margin: 0 auto; }
-.content { padding: 40px 20px; background: #fff; border-left: 1px solid #979797; border-right: 1px solid #979797; }
+.content { position: relative;min-height: calc(100vh - 155px);padding: 40px 20px; background: #fff; border-left: 1px solid #979797; border-right: 1px solid #979797; }
 
 .boxcontainer { display: flex; flex-wrap: wrap; justify-content: space-around; margin-bottom: 40px; }
 
 .box { font-size: 32px; text-align: center; width: 300px; padding: 40px 0; cursor: pointer; }
 .box i { display: block; color: #FFF; font-size: 64px; margin-bottom: 25px; }
+.box span {color: #fff;}
 
 .box-green { background: #00794C; color: #FFF; }
 
@@ -68,14 +69,20 @@ header .container::after { content: ''; display: block; clear: both; }
 .content > .show { display: block; }
 .content ul { margin-bottom: 40px; }
 .content li { border-bottom: 1px solid #979797; padding: 15px 0; }
-.content li:nth-child(2n) { background: #FAFAFA; }
+/*.content li:nth-child(2n) { background: #FAFAFA; }*/
 .content li:last-child { border-bottom: none; }
 .abgeschlossen, .verrechnet { color: #00794C; }
 .bearbeitung, .Bearbeitung { color: #F6A623; }
 .offen { color: #D0011B; }
 .storniert {}
 
+.ticket__check { margin-bottom: 15px; }
+.ticket__check > div { display: inline-block; }
 .ticket__item { padding: 15px 0 0 !important; }
+.ticket__item[data-status="abgeschlossen"],
+.ticket__item[data-status="verrechnet"],
+.ticket__item[data-status="storniert"] { display: none; }
+.ticket__item.notime .ticket__overview > div:nth-child(5) { margin-right:0; }
 .ticket__overview { display: flex; flex-wrap: wrap; cursor: pointer; padding-bottom: 15px;}
 .ticket__overview > div { margin-right: 22px; }
 .ticket__overview > div:nth-child(6) { margin-right: 0; }
@@ -86,26 +93,87 @@ header .container::after { content: ''; display: block; clear: both; }
 .ticket__process span { width: 30px; position: absolute; left: calc(50% - 15px); color: #FFF; line-height: 22px; }
 .ticket__processbar { height: 100%;color: #fff; }
 .ticket__processcount { width: 100px;}
+.ticket__notime { width: 244px; font-size: 14px; line-height: 22px; }
 .ticket__customer { width: 160px; }
 .ticket__status { width: 130px; }
 .ticket__expander { display: none; cursor: auto; width: 100%; padding: 15px 0; border-top: 1px dashed #979797; }
 .ticket__expander .btn {margin-top: 10px; margin-right: 10px}
 .ticket__expander ul {margin-bottom: 0;}
+.ticket__note-list li { padding: 0; border-bottom: none; margin-left: 20px; }
+.ticket__note-list li:before { content: '-'; padding-right: 20px; }
+.ticket__customer-expand { display: none; }
 
 .invoice__item { display: flex; }
-.invoice__id { width: 150px; font-weight: bold; color: #00794C; }
-.invoice__total { width: 60px; text-align: right; margin-right: 20px; }
-.invoice__date { width: 210px; }
+.invoice__id { width: 150px; font-weight: bold; color: #00794C; cursor: pointer; }
+.invoice__total { width: 100px; text-align: right; margin-right: 20px; }
+.invoice__date { width: 250px; }
+.invoice__customer { width: 300px; }
+.invoice__ispayed { width: 100px; }
+.invoice__payed { width: 50px; }
 
-.customer-detail .ticket__customer { display: none; }
+.customer-detail > div {margin-bottom: 40px;}
 .customer-detail .ticket__description {width: 510px; }
 
 .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; }
 .overlay.show { display: table; }
 .overlay > .outerwrapper > div { position: relative; display: none; max-width: 400px; margin: 0 auto; background: #FFF; padding: 40px;}
 .overlay > .outerwrapper > div.show { display: block; }
-.overlay .success span { font-weight: bold; }
+.overlay .success span, .delete-ticket span { font-weight: bold; }
+
+.hash {display: block !important;color: #ccc;font-size: 12px;position: absolute;right: 20px;bottom: 15px;}
 
 .fa-times { cursor: pointer; position: absolute; top: 20px; right: 20px;}
+.fa-check { cursor: pointer; }
+.fa-bars { display: none; position: absolute; top: calc(50% - 15px); right: 30px; color: #FFF; cursor: pointer; z-index: 1000 }
 
 canvas { display: block; margin: 35px auto; border: 1px solid; }
+
+@media (max-width: 568px){
+    .container { width: 100%; }
+    .container.content { width: 96%; margin: 0 auto; padding: 40px 2%; border: none;}
+    .logo { float: none; text-align: center; position: relative; }
+    .fa-bars { display: inline-block; }
+
+    td {display: block; }
+
+    .menu { float: none; display: none; }
+    .menu ul { display: block; }
+    .menu ul li { margin-left: 0; text-align: center;}
+    .menu ul li a { padding: 10px 20px; font-size: 20px; border-bottom: 2px solid #00794C; }
+    .menu ul li a.current { border-bottom: 2px solid #FFF; }
+
+    .box { width: 30vw; font-size: 24px; }
+    .box i { font-size: 48px; margin-bottom: 0; }
+    .box span {display: none;}
+
+    .ticket__overview > div { margin-right: 0;}
+    .ticket__id { width: 13%; margin-right: 3% !important;}
+    .ticket__title { width: 45%; margin-right: 3% !important; }
+    .ticket__notime, .ticket__customer, .ticket__process, .ticket__processcount { display: none; }
+    .ticket__status { width: 36%; }
+    .ticket__customer-expand { display: block; }
+
+    .customer__item > div { display: block; width: 100%; }
+
+    .invoice__item { display: block; }
+    .invoice__item > div { display: inline-block; }
+    .invoice__item.payed-1 .invoice__ispayed { width: 65%; text-align: right; margin-right: 0; }
+    .invoice__id { width: 50%; margin-right: 5%;}
+    .invoice__total { width: 45%; margin-right: 0; }
+    .invoice__date { width: 100%; margin-right: 0; }
+    .invoice__customer { width: 30%; margin-right: 5%; }
+    .invoice__ispayed { width: 30%; margin-right: 5%; text-align: center }
+    .invoice__payed { width: 30%; text-align: right; }
+
+    .ticket__check > div { display: block; }
+
+    canvas { width: 100%; height: auto; }
+}
+
+@media (max-width: 320px ){
+    h1 { font-size: 28px;}
+    h2 { font-size: 24px; margin-bottom: 10px; }
+    input[type="text"] { padding: 5px 15px; }
+    form input, form textarea { margin-bottom: 5px; }
+    .overlay > .outerwrapper > div { padding: 20px; }
+}

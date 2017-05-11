@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - jsTicket</title>
+    <link href="res/css/adminapp.css" rel="stylesheet">
+    <script src="res/js/jquery-3.2.1.min.js"></script>
+    <script src="res/js/benutzer.js"></script>
+</head>
+
+<body>
+<header>
+    <div class="container">
+        <div class="logo">
+            jsTicket
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#" class="tickets current">Tickets</a></li>
+                <li><a href="logout" class="logout">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="content container">
+    <div class="tickets show">
+        <h1>Hallo <span class="name"></span>!</h1>
+        <p>Sie können neue Tickets anlegen und hinfällige Tickets stornieren.</p>
+        <div class="ticket__check">
+            <input type="checkbox" checked id="ticket__check-offen" name="ticket__check-offen"><label for="ticket__check-offen">offen / in Bearbeitung</label>
+            <input type="checkbox" id="ticket__check-abgeschlossen"><label for="ticket__check-abgeschlossen">abgeschlossen</label>
+            <input type="checkbox" id="ticket__check-verrechnet"><label
+                for="ticket__check-verrechnet">verrechnet</label>
+            <input type="checkbox" id="ticket__check-storniert"><label for="ticket__check-storniert">storniert</label>
+        </div>
+        <ul class="ticket__list">
+        </ul>
+        <button class="btn btn-green add-new-ticket">Neues Ticket anlegen</button>
+    </div>
+    <div class="hash"></div>
+</div>
+
+<div class="overlay">
+    <div class="outerwrapper">
+        <div class="add-ticket">
+            <i class="fa fa-times"></i>
+
+            <h2>Ticket anlegen</h2>
+
+            <form class="addticket__form">
+                <label for="addticket__name">Titel</label>
+                <input type="text" id="addticket__name" class="addticket__name"/>
+                <label for="addticket__description">Beschreibung</label>
+                <textarea id="addticket__description" class="addticket__description"></textarea>
+                <button class="btn btn-green">Ticket anlegen</button>
+            </form>
+        </div>
+        <div class="add-ticket-success success">
+            <i class="fa fa-times"></i>
+
+            <h2>Ticket angelegt</h2>
+
+            <p>Das Ticket mit der Nummer <span class="ticket-nr"></span> wurde erfolgreich angelegt!</p>
+            <button class="hide-overlay btn btn-green">OK</button>
+        </div>
+        <div class="delete-ticket">
+            <i class="fa fa-times"></i>
+
+            <h2>Ticket stornieren</h2>
+
+            <p>Wollen Sie das Ticket <strong>#</strong><span class="id"></span> - <span class="name"></span> stornieren? </p>
+            <button class="hide-overlay btn btn-red">Abbrechen</button>
+            <button class="delete-overlay btn btn-green">Bestätigen</button>
+        </div>
+        <div class="edit-ticket">
+            <i class="fa fa-times"></i>
+
+            <h2>Zeit buchen</h2>
+
+            <form class="editticket__form">
+                <h3></h3>
+                <label for="editticket__status">Status</label>
+                <select class="editticket__status" id="editticket__status">
+                    <option value="offen">offen</option>
+                    <option value="in Bearbeitung">in Bearbeitung</option>
+                    <option value="abgeschlossen">abgeschlossen</option>
+                </select>
+                <label for="editticket__offered">Angebotene Arbeitszeit</label>
+                <input type="text" id="editticket__offered" class="editticket__offered"/>
+                <label for="editticket__workedtime">Arbeitszeit</label>
+                <input type="text" id="editticket__workedtime" class="editticket__workedtime"/>
+                <label for="editticket__note">Notiz</label>
+                <textarea id="editticket__note" class="editticket__note"></textarea>
+                <button class="btn btn-green">Zeit buchen</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
