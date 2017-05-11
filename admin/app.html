@@ -2,262 +2,265 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - jsTicket</title>
-    <link href="../res/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../res/css/adminapp.css" rel="stylesheet">
-    <script src="../res/js/jquery-3.2.1.min.js"></script>
-    <script src="../res/js/jquery.hideseek.min.js"></script>
-    <script src="../res/js/jspdf.min.js"></script>
-    <script src="../res/js/forall.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8">
+  <title>Dashboard - jsTicket</title>
+  <link href="../res/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../res/css/adminapp.css" rel="stylesheet">
+  <script src="../res/js/jquery-3.2.1.min.js"></script>
+  <script src="../res/js/jspdf.min.js"></script>
+  <script src="../res/js/forall.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 
 <body>
-<header>
+  <header>
     <div class="container">
 
-        <div class="logo">
-            jsTicket
-            <i class="fa fa-bars"></i>
-        </div>
-        <nav class="menu">
-            <ul>
-                <li><a href="dashboard" class="dashboard current">Dashboard</a></li>
-                <li><a href="customer" class="customer">Kunden</a></li>
-                <li><a href="tickets" class="tickets">Tickets</a></li>
-                <li><a href="invoices" class="invoices">Rechnungen</a></li>
-                <li><a href="logout" class="logout">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-<div class="content container">
-    <div class="dashboard show">
-        <h1>Dashboard</h1>
-
-        <div class="boxcontainer">
-
-            <a href="customer">
-                <div class="box box-green box-customer">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <span>Kunden</span>
-                </div>
-            </a>
-            <a href="tickets">
-                <div class="box box-green box-tickets">
-                    <i class="fa fa-ticket" aria-hidden="true"></i>
-                    <span>Tickets</span>
-                </div>
-            </a>
-            <a href="invoices">
-                <div class="box box-green box-settings">
-                    <i class="fa fa-eur" aria-hidden="true"></i>
-                    <span>Rechnungen</span>
-                </div>
-            </a>
-        </div>
-        <h2>Letzten 5 Tickets</h2>
-        <ul class="ticket__list last-5">
+      <div class="logo">
+        jsTicket
+        <i class="fa fa-bars"></i>
+      </div>
+      <nav class="menu">
+        <ul>
+          <li><a href="dashboard" class="dashboard current">Dashboard</a></li>
+          <li><a href="customer" class="customer">Kunden</a></li>
+          <li><a href="tickets" class="tickets">Tickets</a></li>
+          <li><a href="invoices" class="invoices">Rechnungen</a></li>
+          <li><a href="logout" class="logout">Logout</a></li>
         </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="content container">
+    <div class="dashboard show">
+      <h1>Dashboard</h1>
+
+      <div class="boxcontainer">
+
+        <a href="customer">
+          <div class="box box-green box-customer">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span>Kunden</span>
+          </div>
+        </a>
+        <a href="tickets">
+          <div class="box box-green box-tickets">
+            <i class="fa fa-ticket" aria-hidden="true"></i>
+            <span>Tickets</span>
+          </div>
+        </a>
+        <a href="invoices">
+          <div class="box box-green box-settings">
+            <i class="fa fa-eur" aria-hidden="true"></i>
+            <span>Rechnungen</span>
+          </div>
+        </a>
+      </div>
+      <h2>Letzten 5 Tickets</h2>
+      <ul class="ticket__list last-5">
+      </ul>
     </div>
     <div class="customer">
-        <h1>Kunden</h1>
+      <h1>Kunden</h1>
 
-        <ul class="customer__list">
-        </ul>
-        <button class="btn btn-green add-new-customer">Neuen Kunden anlegen</button>
+      <ul class="customer__list">
+      </ul>
+      <button class="btn btn-green add-new-customer">Neuen Kunden anlegen</button>
     </div>
     <div class="customer-detail">
-        <h1 class="customer-detail__name"></h1>
+      <h1 class="customer-detail__name"></h1>
 
-        <div id="overview">
-            <h2>Übersicht</h2>
-            <table>
-                <tr>
-                    <td><strong>Adresse:</strong></td>
-                    <td class="customer-detail__address"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td class="customer-detail__zip"></td>
-                </tr>
-                <tr>
-                    <td><strong>Kontaktperson:</strong></td>
-                    <td class="customer-detail__person"></td>
-                </tr>
-                <tr>
-                    <td><strong>Email:</strong></td>
-                    <td class="customer-detail__email"></td>
-                </tr>
-                <tr>
-                    <td><strong>Telefonnummer:</strong></td>
-                    <td class="customer-detail__telefon"></td>
-                </tr>
-                <tr>
-                    <td><strong>Stundensatz:</strong></td>
-                    <td class="customer-detail__rate"></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td class=""></td>
-                </tr>
-                <tr>
-                    <td><strong>Hash:</strong></td>
-                    <td class="customer-detail__hash"></td>
-                </tr>
-            </table>
-        </div>
-        <div id="open-tickets">
-            <h2>Offene Tickets</h2>
-            <ul class="ticket__list open">
-
-            </ul>
-            <button class="btn btn-green add-new-ticket">Neues Ticket anlegen</button>
-        </div>
-        <div id="closed-tickets">
-            <h2>Abgeschlossene Tickets</h2>
-            <ul class="ticket__list closed">
-
-            </ul>
-            <button class="btn btn-green create-invoice">Rechnung erstellen</button>
-        </div>
-        <div id="invoice-list">
-            <h2>Rechnungen</h2>
-            <ul class="invoice__list">
-            </ul>
-        </div>
-    </div>
-    <div class="tickets">
-        <h1>Tickets</h1>
-
-        <div class="ticket__check">
-            <div>
-                <input type="checkbox" id="ticket__check-offen" name="ticket__check-offen"><label
-                    for="ticket__check-offen">offen / in Bearbeitung</label>
-            </div>
-            <div>
-                <input type="checkbox" id="ticket__check-abgeschlossen"><label for="ticket__check-abgeschlossen">abgeschlossen</label>
-            </div>
-            <div>
-                <input type="checkbox" id="ticket__check-verrechnet"><label
-                    for="ticket__check-verrechnet">verrechnet</label>
-            </div>
-            <div>
-                <input type="checkbox" id="ticket__check-storniert"><label
-                    for="ticket__check-storniert">storniert</label>
-            </div>
-        </div>
-
-        <ul class="ticket__list">
+      <div id="overview">
+        <h2>Übersicht</h2>
+        <table>
+          <tr>
+            <td><strong>Adresse:</strong></td>
+            <td class="customer-detail__address"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="customer-detail__zip"></td>
+          </tr>
+          <tr>
+            <td><strong>Kontaktperson:</strong></td>
+            <td class="customer-detail__person"></td>
+          </tr>
+          <tr>
+            <td><strong>Email:</strong></td>
+            <td class="customer-detail__email"></td>
+          </tr>
+          <tr>
+            <td><strong>Telefonnummer:</strong></td>
+            <td class="customer-detail__telefon"></td>
+          </tr>
+          <tr>
+            <td><strong>Stundensatz:</strong></td>
+            <td class="customer-detail__rate"></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td class=""></td>
+          </tr>
+          <tr>
+            <td><strong>Hash:</strong></td>
+            <td class="customer-detail__hash"></td>
+          </tr>
+        </table>
+      </div>
+      <div id="open-tickets">
+        <h2>Offene Tickets</h2>
+        <ul class="ticket__list open">
 
         </ul>
-    </div>
-    <div class="invoices">
-        <h1>Rechnungen</h1>
+        <button class="btn btn-green add-new-ticket">Neues Ticket anlegen</button>
+      </div>
+      <div id="closed-tickets">
+        <h2>Abgeschlossene Tickets</h2>
+        <ul class="ticket__list closed">
+
+        </ul>
+        <button class="btn btn-green create-invoice">Rechnung erstellen</button>
+      </div>
+      <div id="invoice-list">
+        <h2>Rechnungen</h2>
         <ul class="invoice__list">
         </ul>
+      </div>
+    </div>
+    <div class="tickets">
+      <h1>Tickets</h1>
+
+      <div class="ticket__check">
+        <div>
+          <input type="checkbox" id="ticket__check-offen" name="ticket__check-offen"><label for="ticket__check-offen">offen / in Bearbeitung</label>
+        </div>
+        <div>
+          <input type="checkbox" id="ticket__check-abgeschlossen"><label for="ticket__check-abgeschlossen">abgeschlossen</label>
+        </div>
+        <div>
+          <input type="checkbox" id="ticket__check-verrechnet"><label for="ticket__check-verrechnet">verrechnet</label>
+        </div>
+        <div>
+          <input type="checkbox" id="ticket__check-storniert"><label for="ticket__check-storniert">storniert</label>
+        </div>
+      </div>
+
+      <ul class="ticket__list">
+
+      </ul>
+    </div>
+    <div class="invoices">
+      <h1>Rechnungen</h1>
+      <ul class="invoice__list">
+      </ul>
     </div>
     <div class="invoices-detail">
-        <h1>Rechnung erstellen</h1>
-        <canvas id="invoice" width="803" height="1188"></canvas>
-        <button class="btn btn-green save-pdf">Rechnung als PDF speichern</button>
+      <h1>Rechnung erstellen</h1>
+      <canvas id="invoice" width="803" height="1188"></canvas>
+      <button class="btn btn-green save-pdf">Rechnung als PDF speichern</button>
     </div>
     <div class="hash"></div>
-</div>
+  </div>
 
-<div class="overlay">
+  <div class="overlay">
     <div class="outerwrapper">
-        <div class="add-customer">
-            <i class="fa fa-times"></i>
-
-            <h2>Kunden anlegen</h2>
-
-            <form class="addcustomer__form">
-                <label for="addcustomer__name">Kundenname</label>
-                <input type="text" id="addcustomer__name" class="addcustomer__name"/>
-                <label for="addcustomer__adress">Adresse</label>
-                <input type="text" id="addcustomer__adress" class="addcustomer__adress"/>
-                <label for="addcustomer__zip">PLZ</label>
-                <input type="text" id="addcustomer__zip" class="addcustomer__zip"/>
-                <label for="addcustomer__city">Ort</label>
-                <input type="text" id="addcustomer__city" class="addcustomer__city"/>
-                <label for="addcustomer__contactperson">Kontaktperson</label>
-                <input type="text" id="addcustomer__contactperson" class="addcustomer__contactperson"/>
-                <label for="addcustomer__email">Email</label>
-                <input type="text" id="addcustomer__email" class="addcustomer__email"/>
-                <label for="addcustomer__telefon">Telefonnummer</label>
-                <input type="text" id="addcustomer__telefon" class="addcustomer__telefon"/>
-                <label for="addcustomer__rate">Stundensatz</label>
-                <input type="text" id="addcustomer__rate" class="addcustomer__rate"/>
-                <button class="btn btn-green">Kunden erstellen</button>
-            </form>
+      <div class="add-customer">
+        <div class="overlay-error">
+          <div class="overlay-error-inner">
+            <h2 class="offen">Fehler!</h2>
+            <span></span><br><br>
+            <button class="btn btn-green">schliessen</button>
+          </div>
         </div>
-        <div class="add-customer-success success">
-            <i class="fa fa-times"></i>
+        <i class="fa fa-times"></i>
 
-            <h2>Kunde angelegt</h2>
+        <h2>Kunden anlegen</h2>
 
-            <p>Der Kunde <span></span> wurde erfolgreich angelegt!</p>
-            <button class="hide-overlay btn btn-green">OK</button>
-        </div>
-        <div class="add-ticket">
-            <i class="fa fa-times"></i>
+        <form class="addcustomer__form">
+          <label for="addcustomer__name">Kundenname</label>
+          <input type="text" id="addcustomer__name" class="addcustomer__name" />
+          <label for="addcustomer__adress">Adresse</label>
+          <input type="text" id="addcustomer__adress" class="addcustomer__adress" />
+          <label for="addcustomer__zip">PLZ</label>
+          <input type="text" id="addcustomer__zip" class="addcustomer__zip" />
+          <label for="addcustomer__city">Ort</label>
+          <input type="text" id="addcustomer__city" class="addcustomer__city" />
+          <label for="addcustomer__contactperson">Kontaktperson</label>
+          <input type="text" id="addcustomer__contactperson" class="addcustomer__contactperson" />
+          <label for="addcustomer__email">Email</label>
+          <input type="text" id="addcustomer__email" class="addcustomer__email" />
+          <label for="addcustomer__telefon">Telefonnummer</label>
+          <input type="text" id="addcustomer__telefon" class="addcustomer__telefon" />
+          <label for="addcustomer__rate">Stundensatz</label>
+          <input type="text" id="addcustomer__rate" class="addcustomer__rate" />
+          <button class="btn btn-green">Kunden erstellen</button>
+        </form>
+      </div>
+      <div class="add-customer-success success">
+        <i class="fa fa-times"></i>
 
-            <h2>Ticket anlegen</h2>
+        <h2>Kunde angelegt</h2>
 
-            <form class="addticket__form">
-                <label for="addticket__name">Titel</label>
-                <input type="text" id="addticket__name" class="addticket__name"/>
-                <label for="addticket__description">Beschreibung</label>
-                <textarea id="addticket__description" class="addticket__description"></textarea>
-                <label for="addticket__offered">Angebotene Zeit</label>
-                <input type="text" id="addticket__offered" class="addticket__offered"/>
-                <button class="btn btn-green">Ticket anlegen</button>
-            </form>
-        </div>
-        <div class="add-ticket-success success">
-            <i class="fa fa-times"></i>
+        <p>Der Kunde <span></span> wurde erfolgreich angelegt!</p>
+        <button class="hide-overlay btn btn-green">OK</button>
+      </div>
+      <div class="add-ticket">
+        <i class="fa fa-times"></i>
 
-            <h2>Ticket angelegt</h2>
+        <h2>Ticket anlegen</h2>
 
-            <p>Das Ticket mit der Nummer <span class="ticket-nr"></span> wurde erfolgreich angelegt!</p>
-            <button class="hide-overlay btn btn-green">OK</button>
-        </div>
-        <div class="delete-ticket">
-            <i class="fa fa-times"></i>
+        <form class="addticket__form">
+          <label for="addticket__name">Titel</label>
+          <input type="text" id="addticket__name" class="addticket__name" />
+          <label for="addticket__description">Beschreibung</label>
+          <textarea id="addticket__description" class="addticket__description"></textarea>
+          <label for="addticket__offered">Angebotene Zeit</label>
+          <input type="text" id="addticket__offered" class="addticket__offered" />
+          <button class="btn btn-green">Ticket anlegen</button>
+        </form>
+      </div>
+      <div class="add-ticket-success success">
+        <i class="fa fa-times"></i>
 
-            <h2>Ticket stornieren</h2>
+        <h2>Ticket angelegt</h2>
 
-            <p>Wollen Sie das Ticket <strong>#</strong><span class="id"></span> - <span class="name"></span> stornieren?
-            </p>
-            <button class="hide-overlay btn btn-red">Abbrechen</button>
-            <button class="delete-overlay btn btn-green">Bestätigen</button>
-        </div>
-        <div class="edit-ticket">
-            <i class="fa fa-times"></i>
+        <p>Das Ticket mit der Nummer <span class="ticket-nr"></span> wurde erfolgreich angelegt!</p>
+        <button class="hide-overlay btn btn-green">OK</button>
+      </div>
+      <div class="delete-ticket">
+        <i class="fa fa-times"></i>
 
-            <h2>Zeit buchen</h2>
+        <h2>Ticket stornieren</h2>
 
-            <form class="editticket__form">
-                <h3></h3>
-                <label for="editticket__status">Status</label>
-                <select class="editticket__status" id="editticket__status">
+        <p>Wollen Sie das Ticket <strong>#</strong><span class="id"></span> - <span class="name"></span> stornieren?
+        </p>
+        <button class="hide-overlay btn btn-red">Abbrechen</button>
+        <button class="delete-overlay btn btn-green">Bestätigen</button>
+      </div>
+      <div class="edit-ticket">
+        <i class="fa fa-times"></i>
+
+        <h2>Zeit buchen</h2>
+
+        <form class="editticket__form">
+          <h3></h3>
+          <label for="editticket__status">Status</label>
+          <select class="editticket__status" id="editticket__status">
                     <option value="offen">offen</option>
                     <option value="in Bearbeitung">in Bearbeitung</option>
                     <option value="abgeschlossen">abgeschlossen</option>
                 </select>
-                <label for="editticket__offered">Angebotene Arbeitszeit</label>
-                <input type="text" id="editticket__offered" class="editticket__offered"/>
-                <label for="editticket__workedtime">Arbeitszeit</label>
-                <input type="text" id="editticket__workedtime" class="editticket__workedtime"/>
-                <label for="editticket__note">Kommentar</label>
-                <textarea id="editticket__note" class="editticket__note"></textarea>
-                <button class="btn btn-green">Zeit buchen</button>
-            </form>
-        </div>
+          <label for="editticket__offered">Angebotene Arbeitszeit</label>
+          <input type="text" id="editticket__offered" class="editticket__offered" />
+          <label for="editticket__workedtime">Arbeitszeit</label>
+          <input type="text" id="editticket__workedtime" class="editticket__workedtime" />
+          <label for="editticket__note">Kommentar</label>
+          <textarea id="editticket__note" class="editticket__note"></textarea>
+          <button class="btn btn-green">Zeit buchen</button>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 </body>
 
 </html>

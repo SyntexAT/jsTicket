@@ -153,7 +153,11 @@ $(document).ready(function () {
                 clearInput();
             },
             error: function (err) {
-                //  alert(err.responseJSON.error);
+              $('.overlay-error').addClass('show');
+              $('.overlay-error span').html(err.responseJSON.error);
+              $('.overlay-error button').on('click',function(){
+                $('.overlay-error.show').removeClass('show');
+              })
             }
         })
     });
@@ -256,7 +260,7 @@ $(document).ready(function () {
      */
     var getOpenTicketsFromCustomer = function (devHash, cusHash) {
         $.ajax({
-                url: ajaxURL + 'tickets/' + devHash + '/' + cusHash,
+                url: ajaxURL + 'ticket/' + devHash,
                 method: 'GET',
                 success: function (data) {
                     $('.ticket__list.open,.ticket__list.closed').empty();
@@ -406,7 +410,7 @@ $(document).ready(function () {
     };
     var getLast5Tickets = function (devHash) {
         $.ajax({
-            url: ajaxURL + 'tickets/' + devHash,
+            url: ajaxURL + 'ticket/' + devHash,
             method: 'GET',
             success: function (data) {
                 data = data.slice(-5);
@@ -507,7 +511,7 @@ $(document).ready(function () {
 
     var getOpenTickets = function (devHash) {
         $.ajax({
-            url: ajaxURL + 'tickets/' + devHash,
+            url: ajaxURL + 'ticket/' + devHash,
             method: 'GET',
             success: function (data) {
                 $('.tickets .ticket__list').empty();
@@ -608,7 +612,7 @@ $(document).ready(function () {
     $(document).on('submit', '.editticket__form', function (e) {
         e.preventDefault();
         $.ajax({
-            url: ajaxURL + 'ticket/bearbeiten/' + $(this).attr('data-customer') + '/' + $(this).attr('data-ticket'),
+            url: ajaxURL + 'ticket/' + $(this).attr('data-customer') + '/' + $(this).attr('data-ticket'),
             method: 'PUT',
             data: {
                 offered: $(this).find('.editticket__offered').val(),
@@ -628,7 +632,7 @@ $(document).ready(function () {
 
     var deleteTicket = function (cusHash, id) {
         $.ajax({
-            url: ajaxURL + 'ticket/stornieren/' + cusHash + '/' + id,
+            url: ajaxURL + 'ticket/' + cusHash + '/' + id,
             method: 'DELETE',
             success: function (data) {
                 getOpenTicketsFromCustomer(developerHash, cID);
@@ -723,7 +727,7 @@ $(document).ready(function () {
         $('.content > div').removeClass('show');
         $('.content .invoices-detail').addClass('show');
     };
-
+    
     $(document).on('click', '.create-invoice', function (e) {
         e.preventDefault();
         $.ajax({
@@ -818,7 +822,7 @@ $(document).ready(function () {
         var cusHash = $(this).parent().parent().attr('data-customer');
 
         $.ajax({
-            url: ajaxURL + 'rechnung-payed/' + developerHash + '/' + id,
+            url: ajaxURL + 'rechnung/' + developerHash + '/' + id,
             method: 'PUT',
             success: function (data) {
                 if (cusHash != '' && cusHash != undefined) {

@@ -1,5 +1,3 @@
-// Mein Webserver
-
 var http = require('http');
 var fs = require('fs');
 var bodyParser = require('body-parser');
@@ -32,7 +30,6 @@ var getJsonData = function (file, callback) {
         }
     })
 }
-
 var writeJsonData = function (file, data) {
     fs.writeFile('data/' + file, JSON.stringify(data));
     console.log('Daten wurden gespeichert! ' + file);
@@ -68,11 +65,13 @@ app.put('/login/:id', function (req, res) {
 
     });
 });
-
 app.post('/register', function (req, res) {
     getJsonData('tickets.json', function (data) {
         var dataDev = data.data;
+
         hash = crypto.createHash('md5').update(req.body.firma + 'synSalt').digest('hex');
+
+
         if (dataDev[hash]) {
             res.writeHead(409, {'Content-Type': 'application/json'});
             res.end(JSON.stringify({error: 'Login existiert schon!'}));
@@ -126,7 +125,6 @@ app.post('/kunde', function (req, res) {
         }
     });
 });
-
 app.get('/kunde/:dev/:id', function (req, res) {
     var id = req.params.id;
     var devHash = req.params.dev;
@@ -137,11 +135,10 @@ app.get('/kunde/:dev/:id', function (req, res) {
         res.end(JSON.stringify(customerDetail));
     });
 });
-
-app.get('/kundenliste/:id', function (req, res) {
-    var id = req.params.id;
+app.get('/kundenliste/:dev', function (req, res) {
+    var dev = req.params.dev;
     getJsonData('tickets.json', function (data) {
-        var customerList = data.data[id].customer;
+        var customerList = data.data[dev].customer;
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(customerList));
     });
@@ -166,25 +163,14 @@ app.post('/ticket', function (req, res) {
         res.end(JSON.stringify(data.data[req.body.devHash].tickets.length));
     })
 });
-
-app.get('/tickets/:dev/:id', function (req, res) {
-    var dev = req.params.dev;
-    var id = req.params.id;
-    getJsonData('tickets.json', function (data) {
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(JSON.stringify(data.data[dev].tickets));
-    });
-});
-
-app.get('/tickets/:dev', function (req, res) {
+app.get('/ticket/:dev', function (req, res) {
     var dev = req.params.dev;
     getJsonData('tickets.json', function (data) {
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(JSON.stringify(data.data[dev].tickets));
     });
 });
-
-app.put('/ticket/bearbeiten/:cus/:id', function (req, res) {
+app.put('/ticket/:cus/:id', function (req, res) {
     var cusHash = req.params.cus;
     var ticketID = req.params.id * 1 - 1;
     getJsonData('tickets.json', function (data) {
@@ -211,8 +197,7 @@ app.put('/ticket/bearbeiten/:cus/:id', function (req, res) {
         res.end(JSON.stringify(data));
     })
 });
-
-app.delete('/ticket/stornieren/:cus/:id', function (req, res) {
+app.delete('/ticket/:cus/:id', function (req, res) {
     var cusHash = req.params.cus;
     var ticketID = req.params.id * 1 - 1;
     getJsonData('tickets.json', function (data) {
@@ -250,7 +235,6 @@ app.get('/rechnungen/:dev/:cus', function (req, res) {
         res.end(JSON.stringify(invoices));
     })
 });
-
 app.get('/rechnung/:dev/:cus', function (req, res) {
     var devHash = req.params.dev;
     var cusHash = req.params.cus;
@@ -289,7 +273,7 @@ app.get('/rechnung/:dev/:cus', function (req, res) {
         res.end(JSON.stringify(invoiceData));
     });
 });
-app.put('/rechnung-payed/:dev/:id', function(req, res) {
+app.put('/rechnung/:dev/:id', function(req, res) {
     var devHash = req.params.dev;
     var id = req.params.id;
     getJsonData('tickets.json', function(data){
@@ -300,7 +284,6 @@ app.put('/rechnung-payed/:dev/:id', function(req, res) {
         res.end(JSON.stringify(ticket));
     });
 });
-
 app.get('/rechnung-detail/:dev/:id', function (req, res) {
     var devHash = req.params.dev;
     var id = req.params.id;
@@ -311,8 +294,7 @@ app.get('/rechnung-detail/:dev/:id', function (req, res) {
     })
 });
 
-
-app.put('/userlogin/:id', function (req, res) {
+app.get('/userlogin/:id', function (req, res) {
     var id = req.params.id;
     getJsonData('tickets.json', function (data) {
         var userFound = 0, hash = '';
@@ -334,7 +316,6 @@ app.put('/userlogin/:id', function (req, res) {
 
     });
 });
-
 app.get('/userticket/:cus', function (req, res) {
     var cusHash = req.params.cus;
     getJsonData('tickets.json', function (data) {
@@ -360,7 +341,6 @@ app.get('/userticket/:cus', function (req, res) {
         res.end(JSON.stringify(customer));
     })
 });
-
 app.post('/userticket/:cus', function (req, res) {
     var cusHash = req.params.cus;
     getJsonData('tickets.json', function (data) {

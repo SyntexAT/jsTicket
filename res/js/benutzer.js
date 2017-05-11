@@ -22,7 +22,7 @@ $(document).ready(function () {
         var hash = $('#hash').val();
         $.ajax({
             url: ajaxURL + 'userlogin/' + hash,
-            method: 'PUT',
+            method: 'GET',
             success: function (data) {
                 localStorage.setItem('hash', data);
                 window.location = "app.html";
@@ -72,7 +72,6 @@ $(document).ready(function () {
         e.preventDefault();
         var tName = $('.addticket__name').val();
         var tDesc = $('.addticket__description').val();
-        console.log(cID, tName, tDesc);
         $.ajax({
             url: ajaxURL + 'userticket/' + cID,
             method: 'POST',
@@ -82,7 +81,6 @@ $(document).ready(function () {
                 description: tDesc
             },
             success: function (data) {
-                console.log(data);
                 $('.overlay .add-ticket').toggleClass('show');
                 $('.overlay .add-ticket-success').toggleClass('show');
                 $('.overlay .add-ticket-success span').html(data);
@@ -97,7 +95,6 @@ $(document).ready(function () {
             url: ajaxURL + 'userticket/' + cusHash,
             method: 'GET',
             success: function (data) {
-                console.log(data);
                 $('h1 span').html(data.person);
                 $('.tickets .ticket__list').empty();
                 for (var i in data.tickets) {

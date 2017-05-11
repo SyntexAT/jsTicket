@@ -34,6 +34,7 @@ label { font-size: 14px; }
 form input, form textarea { width: calc(100% - 32px); margin-bottom: 10px; }
 form button { width: 100%; }
 input[type="text"] { padding: 10px 15px; border: 1px solid #ccc; }
+input.error { border: 1px solid #D0011B; }
 textarea { padding: 10px 15px; border: 1px solid #ccc; resize: none; height: 5em;}
 select { width: 100%; padding: 10px 15px; margin-bottom: 10px; }
 table tr td:first-child { width: 150px; }
@@ -119,6 +120,9 @@ header .container::after { content: ''; display: block; clear: both; }
 .overlay > .outerwrapper > div { position: relative; display: none; max-width: 400px; margin: 0 auto; background: #FFF; padding: 40px;}
 .overlay > .outerwrapper > div.show { display: block; }
 .overlay .success span, .delete-ticket span { font-weight: bold; }
+.overlay-error {display: none; position: absolute;top: 0;left: 0;height: 100%;width: 100%;background: rgba(0,0,0,0.5); z-index: 1000}
+.overlay-error.show {display: block; }
+.overlay-error-inner {padding: 40px;position: absolute;background: #fff;margin: 40px 106px;}
 
 .hash {display: block !important;color: #ccc;font-size: 12px;position: absolute;right: 20px;bottom: 15px;}
 
